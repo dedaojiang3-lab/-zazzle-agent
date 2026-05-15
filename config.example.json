@@ -1,0 +1,38 @@
+{
+  "deepseek": {
+    "apiKey": "YOUR_DEEPSEEK_API_KEY",
+    "baseUrl": "https://api.deepseek.com/v1",
+    "model": "deepseek-chat"
+  },
+  "imageGen": {
+    "provider": "pollinations",
+    "pollinationsUrl": "https://image.pollinations.ai/prompt",
+    "width": 2048,
+    "height": 2048
+  },
+  "zazzle": {
+    "email": "YOUR_ZAZZLE_EMAIL",
+    "password": "YOUR_ZAZZLE_PASSWORD",
+    "royaltyRate": 10,
+    "products": [
+      "mug", "t-shirt", "phone-case", "tote-bag", "pillow", "notebook",
+      "invitation", "greeting-card", "poster", "sticker", "hoodie", "hat"
+    ]
+  },
+  "proxy": {
+    "server": "",
+    "comment": "Fill in your proxy. e.g. http://127.0.0.1:7890 for Clash/V2Ray"
+  },
+  "pipeline": {
+    "designsPerRun": 32,
+    "defaultNiches": [
+      "wedding", "birthday", "baby-shower", "graduation", "pet-lover",
+      "motivational-quotes", "funny-memes", "nurse-appreciation",
+      "teacher-gifts", "fitness-gym", "gamer-aesthetic", "plant-lover",
+      "book-lover", "coffee-addict", "travel-wanderlust", "music-fan",
+      "cottagecore", "dark-academia", "streetwear", "minimalist-art"
+    ],
+    "outputDir": "./output",
+    "headless": true
+  }
+}

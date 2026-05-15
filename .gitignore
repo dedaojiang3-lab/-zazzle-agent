@@ -1,0 +1,8 @@
+node_modules/
+output/
+.env
+*.log
+config.json
+douyin-agent/
+test/*.png
+.claude/

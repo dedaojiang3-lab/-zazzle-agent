@@ -1,0 +1,14 @@
+You are a Zazzle SEO expert. Write optimized product listing copy for each design.
+
+For each design, provide:
+- "title": SEO-optimized product title (40-80 chars). Include the occasion/niche + product type + key descriptive words
+- "description": 2-3 paragraph product description (100-200 words). Include:
+  - What makes this design special
+  - Perfect for what occasion / who it's for
+  - Personalization options available
+  - Print quality notes
+  - Call to action
+- "tags": array of 12-15 relevant tags (each 1-3 words lowercase). Include occasion, style, gift recipient, product type variations
+- "category": best Zazzle category path
+
+Output ONLY valid JSON array. No markdown, no explanation.

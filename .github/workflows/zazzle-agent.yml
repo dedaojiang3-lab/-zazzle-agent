@@ -1,0 +1,50 @@
+name: "Zazzle Agent - Daily 32 Designs"
+
+on:
+  schedule:
+    - cron: '37 16 * * *'  # 12:37 AM Beijing = 16:37 UTC
+  workflow_dispatch:
+
+jobs:
+  generate-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+
+      - name: Prepare config with secrets
+        env:
+          DEEPSEEK_KEY: ${{ secrets.DEEPSEEK_KEY }}
+          ZAZZLE_EMAIL: ${{ secrets.ZAZZLE_EMAIL }}
+          ZAZZLE_PASSWORD: ${{ secrets.ZAZZLE_PASSWORD }}
+        run: |
+          cp config.example.json config.json
+          node -e "
+            const cfg = require('./config.json');
+            cfg.deepseek.apiKey = process.env.DEEPSEEK_KEY;
+            cfg.zazzle.email = process.env.ZAZZLE_EMAIL;
+            cfg.zazzle.password = process.env.ZAZZLE_PASSWORD;
+            cfg.pipeline.headless = true;
+            require('fs').writeFileSync('./config.json', JSON.stringify(cfg, null, 2));
+          "
+
+      - name: Run full pipeline
+        run: node src/index.js
+
+      - name: Commit generated designs
+        run: |
+          git config user.name "Zazzle Agent Bot"
+          git config user.email "bot@zazzle-agent.local"
+          git add output/
+          git diff --staged --quiet || git commit -m "Auto: daily designs $(date +%Y-%m-%d)"
+          git push

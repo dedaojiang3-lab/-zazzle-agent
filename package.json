@@ -1,0 +1,19 @@
+{
+  "name": "zazzle-agent",
+  "version": "1.0.0",
+  "description": "AI agent for automated Zazzle design creation and listing",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "research": "node src/index.js --research-only",
+    "design": "node src/index.js --design-only",
+    "listing": "node src/index.js --listing-only",
+    "upload": "node src/index.js --upload-only"
+  },
+  "dependencies": {
+    "playwright": "^1.52.0",
+    "sharp": "^0.33.0",
+    "openai": "^4.90.0"
+  }
+}
