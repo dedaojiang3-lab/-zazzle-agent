@@ -29,13 +29,14 @@ jobs:
           ZAZZLE_PASSWORD: ${{ secrets.ZAZZLE_PASSWORD }}
         run: |
           cp config.example.json config.json
-          node -e "
-            const cfg = require('./config.json');
+          node --input-type=commonjs -e "
+            const fs = require('fs');
+            const cfg = JSON.parse(fs.readFileSync('./config.json', 'utf-8'));
             cfg.deepseek.apiKey = process.env.DEEPSEEK_KEY;
             cfg.zazzle.email = process.env.ZAZZLE_EMAIL;
             cfg.zazzle.password = process.env.ZAZZLE_PASSWORD;
             cfg.pipeline.headless = true;
-            require('fs').writeFileSync('./config.json', JSON.stringify(cfg, null, 2));
+            fs.writeFileSync('./config.json', JSON.stringify(cfg, null, 2));
           "
 
       - name: Run full pipeline
